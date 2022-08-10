@@ -2,6 +2,9 @@ import 'package:cleaner_contact/constants/colors.dart';
 import 'package:cleaner_contact/widgets/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/contact.provider.dart';
 
 class BodyWidget extends StatefulWidget {
   const BodyWidget({Key? key}) : super(key: key);
@@ -24,8 +27,11 @@ class _BodyWidgetState extends State<BodyWidget> {
     if (!await FlutterContacts.requestPermission(readonly: true)) {
       setState(() => _permissionDenied = true);
     } else {
+      var contactProvider =
+          Provider.of<ContactProvider>(context, listen: false);
       final contacts = await FlutterContacts.getContacts(
           withProperties: true, withPhoto: true);
+      contactProvider.setContactsList(contacts);
       print(contacts);
       setState(() => _contacts = contacts);
     }

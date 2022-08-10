@@ -24,7 +24,7 @@ class _ContactWidgetState extends State<ContactWidget> {
       elevation: 2,
       child: ListTile(
         leading: (widget.image == null)
-            ? const CircleAvatar(child: Icon(Icons.person))
+            ? CircleAvatar(child: Text(widget.name!.split('')[0]))
             : CircleAvatar(
                 backgroundImage: MemoryImage(widget.image!),
                 maxRadius: 27,

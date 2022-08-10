@@ -1,6 +1,8 @@
 import 'package:cleaner_contact/constants/colors.dart';
+import 'package:cleaner_contact/providers/contact.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class AppBarCustom extends StatefulWidget implements PreferredSizeWidget {
   const AppBarCustom({Key? key}) : super(key: key);
@@ -15,6 +17,8 @@ class AppBarCustom extends StatefulWidget implements PreferredSizeWidget {
 class _AppBarCustomState extends State<AppBarCustom> {
   @override
   Widget build(BuildContext context) {
+    final ContactProvider contactProvider =
+        Provider.of<ContactProvider>(context, listen: false);
     return AppBar(
       backgroundColor: primaryColor,
       elevation: 0,
@@ -25,10 +29,16 @@ class _AppBarCustomState extends State<AppBarCustom> {
             style: GoogleFonts.aBeeZee(
                 fontSize: 30, fontWeight: FontWeight.bold, color: textColor),
           ),
-          Text(
-            "(Vous avez 150 contacts)",
-            style: GoogleFonts.lato(
-                fontSize: 15, fontWeight: FontWeight.bold, color: textColor),
+          Consumer<ContactProvider>(
+            builder: ((context, value, child) {
+              return Text(
+                "(Vous avez ${value.contactsList.length} contacts)",
+                style: GoogleFonts.lato(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: textColor),
+              );
+            }),
           )
         ],
       ),
