@@ -17,33 +17,36 @@ class AppBarCustom extends StatefulWidget implements PreferredSizeWidget {
 class _AppBarCustomState extends State<AppBarCustom> {
   @override
   Widget build(BuildContext context) {
-    final ContactProvider contactProvider =
+    ContactProvider contactProvider =
         Provider.of<ContactProvider>(context, listen: false);
-    return AppBar(
-      backgroundColor: primaryColor,
-      elevation: 0,
-      title: Column(
-        children: [
-          Text(
-            "Cleaner Contact",
-            style: GoogleFonts.aBeeZee(
-                fontSize: 30, fontWeight: FontWeight.bold, color: textColor),
-          ),
-          Consumer<ContactProvider>(
-            builder: ((context, value, child) {
-              return Text(
+    return Consumer<ContactProvider>(
+      builder: (context, value, child) {
+        return AppBar(
+          backgroundColor:
+              value.selectedContacts.isNotEmpty ? secondaryColor : primaryColor,
+          elevation: 0,
+          title: Column(
+            children: [
+              Text(
+                "Cleaner Contact",
+                style: GoogleFonts.aBeeZee(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: textColor),
+              ),
+              Text(
                 "(Vous avez ${value.contactsList.length} contacts)",
                 style: GoogleFonts.lato(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: textColor),
-              );
-            }),
-          )
-        ],
-      ),
-      centerTitle: true,
-      titleTextStyle: const TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ],
+          ),
+          centerTitle: true,
+          titleTextStyle: const TextStyle(fontStyle: FontStyle.italic),
+        );
+      },
     );
   }
 }

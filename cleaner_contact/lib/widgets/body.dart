@@ -23,6 +23,11 @@ class _BodyWidgetState extends State<BodyWidget> {
     _fetchContacts();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Future _fetchContacts() async {
     if (!await FlutterContacts.requestPermission(readonly: true)) {
       setState(() => _permissionDenied = true);
@@ -48,17 +53,22 @@ class _BodyWidgetState extends State<BodyWidget> {
     }
 
     return SingleChildScrollView(
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: _contacts!.length,
-        itemBuilder: (context, index) {
-          return ContactWidget(
-              name: _contacts![index].displayName,
-              numero: (_contacts![index].phones.isNotEmpty)
-                  ? (_contacts![index].phones.first.number)
-                  : "---",
-              image: _contacts![index].photo);
-        },
+      child: RefreshIndicator(
+        color: primaryColor,
+        onRefresh: _fetchContacts,
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: _contacts!.length,
+          itemBuilder: (context, index) {
+            return ContactWidget(
+                index: index,
+                name: _contacts![index].displayName,
+                numero: (_contacts![index].phones.isNotEmpty)
+                    ? (_contacts![index].phones.first.number)
+                    : "---- ----",
+                image: _contacts![index].photo);
+          },
+        ),
       ),
     );
   }
