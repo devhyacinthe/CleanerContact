@@ -1,5 +1,4 @@
 import 'package:cleaner_contact/screens/home.screen.dart';
-import 'package:cleaner_contact/widgets/body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/contact.provider.dart';

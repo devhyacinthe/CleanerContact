@@ -1,8 +1,5 @@
 import 'package:cleaner_contact/constants/colors.dart';
-import 'package:cleaner_contact/widgets/body.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_contacts/contact.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/contact.provider.dart';

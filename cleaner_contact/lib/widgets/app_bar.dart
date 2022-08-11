@@ -17,8 +17,6 @@ class AppBarCustom extends StatefulWidget implements PreferredSizeWidget {
 class _AppBarCustomState extends State<AppBarCustom> {
   @override
   Widget build(BuildContext context) {
-    ContactProvider contactProvider =
-        Provider.of<ContactProvider>(context, listen: false);
     return Consumer<ContactProvider>(
       builder: (context, value, child) {
         return AppBar(

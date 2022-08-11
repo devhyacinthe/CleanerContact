@@ -62,12 +62,12 @@ class _ContactWidgetState extends State<ContactWidget> {
                       isSelected = !isSelected;
                       contactProvider.removeToSelectedContacts(
                           contactProvider.contactsList[widget.index]);
-                      print(contactProvider.selectedContacts);
+                      //print(contactProvider.selectedContacts);
                     } else {
                       isSelected = !isSelected;
                       contactProvider.addToSelectedContacts(
                           contactProvider.contactsList[widget.index]);
-                      print(contactProvider.selectedContacts);
+                      //print(contactProvider.selectedContacts);
                     }
                   });
                 },

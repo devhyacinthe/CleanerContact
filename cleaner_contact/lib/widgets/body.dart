@@ -37,7 +37,7 @@ class _BodyWidgetState extends State<BodyWidget> {
       final contacts = await FlutterContacts.getContacts(
           withProperties: true, withPhoto: true);
       contactProvider.setContactsList(contacts);
-      print(contacts);
+      //print(contacts);
       setState(() => _contacts = contacts);
     }
   }
