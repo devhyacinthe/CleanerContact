@@ -1,6 +1,8 @@
 import 'package:cleaner_contact/constants/colors.dart';
+import 'package:cleaner_contact/widgets/body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/contact.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/contact.provider.dart';
@@ -18,6 +20,35 @@ class _BottomButtonState extends State<BottomButton> {
     ContactProvider contactProvider =
         Provider.of<ContactProvider>(context, listen: false);
     return Consumer<ContactProvider>(builder: ((context, value, child) {
+      if (value.selectedContacts.isEmpty) {
+        return GestureDetector(
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.all(7.0),
+            child: Container(
+                height: 75,
+                width: 150,
+                decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(color: primaryColor, blurRadius: 2.0)
+                    ],
+                    color: contactProvider.selectedContacts.isNotEmpty
+                        ? secondaryColor
+                        : primaryColor,
+                    borderRadius: BorderRadius.circular(12)),
+                child: Expanded(
+                    child: Center(
+                  child: Text("Supprimer",
+                      style: GoogleFonts.aBeeZee(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
+                        color: textColor,
+                        letterSpacing: 2,
+                      )),
+                ))),
+          ),
+        );
+      }
       return GestureDetector(
         onTap: () {
           showDialog<String>(
@@ -51,7 +82,6 @@ class _BottomButtonState extends State<BottomButton> {
                 TextButton(
                   onPressed: () => {
                     setState(() {
-                      initState();
                       contactProvider.deleteSelectedContact();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -69,7 +99,7 @@ class _BottomButtonState extends State<BottomButton> {
                                       color: textColor)),
                         ),
                       );
-                      Navigator.pop(context, 'Oui');
+                      Navigator.pushNamed(context, '/home');
                     }),
                   },
                   child: Text('Oui',

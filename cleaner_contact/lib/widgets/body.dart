@@ -52,24 +52,26 @@ class _BodyWidgetState extends State<BodyWidget> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    return SingleChildScrollView(
-      child: RefreshIndicator(
-        color: primaryColor,
-        onRefresh: _fetchContacts,
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: _contacts!.length,
-          itemBuilder: (context, index) {
-            return ContactWidget(
-                index: index,
-                name: _contacts![index].displayName,
-                numero: (_contacts![index].phones.isNotEmpty)
-                    ? (_contacts![index].phones.first.number)
-                    : "---- ----",
-                image: _contacts![index].photo);
-          },
+    return Consumer<ContactProvider>(builder: ((context, value, child) {
+      return SingleChildScrollView(
+        child: RefreshIndicator(
+          color: primaryColor,
+          onRefresh: _fetchContacts,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: _contacts!.length,
+            itemBuilder: (context, index) {
+              return ContactWidget(
+                  index: index,
+                  name: _contacts![index].displayName,
+                  numero: (_contacts![index].phones.isNotEmpty)
+                      ? (_contacts![index].phones.first.number)
+                      : "---- ----",
+                  image: _contacts![index].photo);
+            },
+          ),
         ),
-      ),
-    );
+      );
+    }));
   }
 }

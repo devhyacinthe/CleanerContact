@@ -1,4 +1,5 @@
 import 'package:cleaner_contact/screens/home.screen.dart';
+import 'package:cleaner_contact/widgets/body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/contact.provider.dart';
@@ -22,10 +23,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Cleaner Contact',
+      routes: {'/home': (_) => const Home()},
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: const Home(),
     );
   }
 }
